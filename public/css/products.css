@@ -1,0 +1,115 @@
+.product-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+  }
+  .form-control label,
+  .form-control input, 
+  .form-control textarea{
+    display: block;
+    width: 100%;
+  }
+  .form-control input {
+    border: 1px solid #dbc441;
+    font: inherit;
+    border-radius: 2px;
+  }
+  .form-control {
+    margin: 1rem 0;
+  }
+  button {
+    font: inherit;
+    border: 1px solid #af14df;
+    background-color: #fff;
+    color: #dbc441;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:active,
+  button:hover {
+    background-color: #af14df;
+    color: #fff;
+  }
+  .card_image{
+    height : 10rem;
+    width: 10rem;
+  }
+  .card{
+    width: 20rem;
+    max-width: 90%;
+    margin-left: 4rem;
+    display: block;
+  }
+
+  .form-control {
+    margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+}
+
+.form-control input {
+    border: 1px solid #a1a1a1;
+    font: inherit;
+    border-radius: 2px;
+}
+
+.form-control input:focus, .form-control textarea:focus {
+    outline-color: #00695c;
+}
+.product-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+}
+.product-item {
+  width: 20rem;
+  max-width: 95%;
+}
+
+.product__title {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.product__price {
+  text-align: center;
+  color: #4d4d4d;
+  margin-bottom: 0.5rem;
+}
+
+.product__description {
+  text-align: center;
+}
+.product-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+.product-item {
+  width: 20rem;
+  max-width: 95%;
+  margin: 1rem;
+}
+
+.product__title {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.product__price {
+  text-align: center;
+  color: #4d4d4d;
+  margin-bottom: 0.5rem;
+}
+
+.product__description {
+  text-align: center;
+}
