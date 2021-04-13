@@ -10,12 +10,16 @@ exports.getAddProducts = (req, res, next) => {
 
 exports.postAddProducts = (req, res) => {
   const title = req.body.title
-  const imageUrl = req.body.imageUrl
+  const imageUrl = req.body.imageuri
   const price = req.body.price
   const description = req.body.description
-  const product = new Product(null, title, description, imageUrl, price)
-  product.save()
-  res.redirect("/")
+  const product = new Product(title, description, price, imageUrl, null)
+  product
+    .save()
+    .then(() => {
+      res.redirect("/")
+    })
+    .catch((err) => console.log(err))
 }
 
 exports.getEditProduct = (req, res, next) => {

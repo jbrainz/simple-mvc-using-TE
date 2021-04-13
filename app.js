@@ -9,6 +9,7 @@ app.set("views", "views")
 const adminRoutes = require("./routes/admin")
 const shopRoutes = require("./routes/shop")
 const controllerError = require("./controllers/error")
+const db = require("./util/database")
 
 app.use(
   express.urlencoded({
