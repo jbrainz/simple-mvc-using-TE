@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize")
 
-const sequelize = new Sequelize("nodejs", "postgres", "postgres", {
+const sequelize = new Sequelize("nodeJS", "postgres", "postgres", {
   host: "jb",
   dialect: "postgres" /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
 })
