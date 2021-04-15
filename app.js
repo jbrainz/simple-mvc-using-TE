@@ -1,5 +1,6 @@
 const path = require("path")
 const express = require("express")
+const mongoose = require("mongoose")
 
 const app = express()
 app.set("view engine", "ejs")
@@ -9,8 +10,8 @@ const adminRoutes = require("./routes/admin")
 const shopRoutes = require("./routes/shop")
 const controllerError = require("./controllers/error")
 
-const mongoConnect = require("./util/database").mongoConnect
 const User = require("./models/user")
+const uri = require("./util/mongoUri")
 
 app.use(
   express.urlencoded({
@@ -20,9 +21,9 @@ app.use(
 app.use(express.static(path.join(__dirname, "public")))
 
 app.use((req, res, next) => {
-  User.findById("60772d68683b58d87795d0be")
+  User.findById("6077dc8d904b152784aeb4e3")
     .then((user) => {
-      req.user = new User(user.username, user.email, user.cart, user._id)
+      req.user = user
       next()
     })
     .catch((err) => console.log(err))
@@ -32,9 +33,25 @@ app.use("/admin", adminRoutes)
 app.use(shopRoutes)
 app.use(controllerError.notFound)
 
-mongoConnect(() => {
-  app.listen(4000)
-})
+mongoose
+  .connect(uri)
+  .then(() => {
+    User.findOne().then((user) => {
+      if (!user) {
+        const user = new User({
+          name: "Pius",
+          email: "test@mail.com",
+          cart: {
+            items: [],
+          },
+        })
+        user.save()
+      }
+    })
+
+    app.listen(4000)
+  })
+  .catch((err) => console.log(err))
 
 // const sequelize = require("./util/database")
 // const Product = require("./models/product")
