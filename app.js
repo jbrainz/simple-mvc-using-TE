@@ -15,7 +15,7 @@ const store = new MongoDBStore({
   collection: "sessions",
 })
 app.use(cookieParser())
-app.use(csrfProtection)
+// app.use(csrfProtection)
 
 app.set("view engine", "ejs")
 app.set("views", "views")
@@ -57,7 +57,7 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn
-  res.locals.csrfToken = req.csrfToken()
+  // res.locals.csrfToken = req.csrfToken()
   next()
 })
 

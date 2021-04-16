@@ -79,7 +79,7 @@ exports.getIndex = (req, res, next) => {
         prods: products,
         pageTitle: "Home",
         path: "/",
-        csrfToken: req.csrfToken(),
+        // csrfToken: req.csrfToken(),
       })
     })
     .catch((err) => {
