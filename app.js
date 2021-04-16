@@ -1,17 +1,26 @@
 const path = require("path")
 const express = require("express")
 const mongoose = require("mongoose")
+const session = require("express-session")
+const MongoDBStore = require("connect-mongodb-session")(session)
+const uri = require("./util/mongoUri")
 
 const app = express()
+const store = new MongoDBStore({
+  uri: uri,
+  collection: "sessions",
+})
+
 app.set("view engine", "ejs")
 app.set("views", "views")
 
 const adminRoutes = require("./routes/admin")
 const shopRoutes = require("./routes/shop")
+const auth = require("./routes/auth")
+
 const controllerError = require("./controllers/error")
 
 const User = require("./models/user")
-const uri = require("./util/mongoUri")
 
 app.use(
   express.urlencoded({
@@ -20,8 +29,20 @@ app.use(
 )
 app.use(express.static(path.join(__dirname, "public")))
 
+app.use(
+  session({
+    secret: "mySecret",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  }),
+)
+
 app.use((req, res, next) => {
-  User.findById("6077dc8d904b152784aeb4e3")
+  if (!req.session.user) {
+    return next()
+  }
+  User.findById(req.session.user._id)
     .then((user) => {
       req.user = user
       next()
@@ -29,6 +50,7 @@ app.use((req, res, next) => {
     .catch((err) => console.log(err))
 })
 
+app.use(auth)
 app.use("/admin", adminRoutes)
 app.use(shopRoutes)
 app.use(controllerError.notFound)
