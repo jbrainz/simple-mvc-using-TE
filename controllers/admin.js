@@ -1,15 +1,14 @@
 const Product = require("../models/product")
 
-const mongodb = require("mongodb")
-
-const ObjectID = mongodb.ObjectID
-
 exports.getAddProducts = (req, res, next) => {
+  //Protecting routes manually
+  // if (!req.session.isLoggedIn) {
+  //   return req.redirect("/login")
+  // }
   res.render("admin/edit-product", {
     pageTitle: "Add Product",
     path: "/admin/add-product",
     editing: false,
-    isAuthenticated: req.isLoggedIn,
   })
 }
 
@@ -75,7 +74,6 @@ exports.getEditProduct = (req, res, next) => {
         path: "/admin/edit-product",
         editing: editMode,
         product,
-        isAuthenticated: req.session.isLoggedIn,
       })
     })
     .catch((err) => console.log(err))
@@ -115,13 +113,11 @@ exports.adminProducts = (req, res, next) => {
     // .select("title price -_id")
     // .populate("userId")
     .then((products) => {
-      console.log(products)
       res.render("admin/product", {
         prods: products,
         pageTitle: "Admin Products",
         hasProducts: products.length > 0,
         path: "/admin/products",
-        isAuthenticated: req.session.isLoggedIn,
       })
     })
     .catch((err) => console.log(err))

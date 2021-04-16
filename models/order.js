@@ -16,7 +16,7 @@ const ordersSchema = new Schema({
     },
   ],
   users: {
-    name: {
+    email: {
       type: String,
       required: true,
     },
